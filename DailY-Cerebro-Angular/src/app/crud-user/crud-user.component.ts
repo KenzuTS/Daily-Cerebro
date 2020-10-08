@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -18,7 +19,8 @@ export class CrudUserComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private authenticationService: AuthenticationService,
-		private userService: UserService
+		private userService: UserService,
+		private router: Router
 	) {
 		this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
 			this.currentUser = user;
@@ -36,7 +38,7 @@ export class CrudUserComponent implements OnInit, OnDestroy {
 
 	deleteUser(id: number) {
 		this.userService.delete(id).pipe(first()).subscribe(() => {
-			this.loadAllUsers()
+			this.loadAllUsers();
 		});
 	}
 
@@ -44,6 +46,11 @@ export class CrudUserComponent implements OnInit, OnDestroy {
 		this.userService.getAll().pipe(first()).subscribe(users => {
 			this.users = users;
 		});
+	}
+
+	detailUser(id: number){
+		let url = "cruduser/" + id;
+		this.router.navigate([url]);
 	}
 
 }

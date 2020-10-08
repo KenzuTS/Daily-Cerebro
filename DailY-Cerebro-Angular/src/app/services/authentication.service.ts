@@ -23,7 +23,7 @@ export class AuthenticationService {
 	login(username: string, password: string) {
 
 		//TODO set url to call login service from server
-		return this.http.post<User>('url', { username, password })
+		return this.http.post<User>(`https://testuser-9c352.firebaseio.com/users/authenticate`, { username, password })
 			.pipe(map(
 
 				user => {

@@ -13,15 +13,18 @@ import { AlertComponent } from './alert/alert.component';
 import { CrudUserComponent } from './crud-user/crud-user.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
 
 	{ path: '', component: HomeComponent },
 	{ path: 'cruduser', component: CrudUserComponent, canActivate: [AuthGuard] },
+	{ path: 'cruduser/:id', component: EditUserComponent, canActivate: [AuthGuard] },
 	{ path: 'login', component: LoginComponent },
 
 	// otherwise redirect to home
-	{ path: '**', redirectTo: '' }
+	{ path: '**', redirectTo: '' } // TODO 404 this page doesn't exist
 ]
 
 @NgModule({
@@ -41,7 +44,9 @@ const appRoutes: Routes = [
 	],
 	providers: [
 		AuthenticationService,
-		AlertService
+		AlertService,
+		AuthGuard,
+		UserService
 	],
 	bootstrap: [AppComponent]
 })

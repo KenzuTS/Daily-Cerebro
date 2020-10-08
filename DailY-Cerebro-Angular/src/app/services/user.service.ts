@@ -7,22 +7,22 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	getAll() {
-		return this.http.get<User[]>(`urlServer/users`);
+		return this.http.get<User[]>(`https://testuser-9c352.firebaseio.com/users`);
 	}
 
 	getById(id: number) {
-		return this.http.get(`urlServer/users/${id}`);
+		return this.http.get<User>(`https://testuser-9c352.firebaseio.com/users/${id}`);
 	}
 
 	register(user: User) {
-		return this.http.post(`urlServer/users/register`, user);
+		return this.http.post(`https://testuser-9c352.firebaseio.com/users/register`, user);
 	}
 
 	update(user: User) {
-		return this.http.put(`urlServer/users/${user.id}`, user);
+		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.id}`, user);
 	}
 
 	delete(id: number) {
-		return this.http.delete(`urlServer/users/${id}`);
+		return this.http.delete(`https://testuser-9c352.firebaseio.com/users/${id}`);
 	}
 }
