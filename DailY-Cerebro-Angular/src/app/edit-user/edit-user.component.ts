@@ -15,8 +15,7 @@ export class EditUserComponent implements OnInit {
 	// TODO bind to user only
 	username: string;
 	password: string;
-	firstName: string;
-	lastName: string;
+	mail: string;
 	user: User;
 
 	constructor(
@@ -33,10 +32,10 @@ export class EditUserComponent implements OnInit {
 		)
 	}
 
-	submit(form: NgForm){
-		this.user.username = form.value['username'];
-		this.user.firstName = form.value['firstName'];
-		this.user.lastName = form.value['lastName'];
+	onSubmit(form: NgForm){
+
+		this.user.$username = form.value['username'];
+		this.user.$mail = form.value['mail'];
 		this.userService.update(this.user);
 	}
 

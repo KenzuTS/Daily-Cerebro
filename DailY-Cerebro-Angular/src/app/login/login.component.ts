@@ -56,6 +56,10 @@ export class LoginComponent implements OnInit {
 
 		this.loading = true;
 
+		// TODO remove this
+		this.authenticationService.testLogin(this.f.username.value, this.f.password.value);
+		return;
+
 		this.authenticationService.login(this.f.username.value, this.f.password.value)
 		.pipe(first())
 		.subscribe(
@@ -65,7 +69,7 @@ export class LoginComponent implements OnInit {
 			},
 
 			error => {
-				if (typeof error != "string") {
+				if (typeof error != "string") { //TODO remove
 					error = "Error " + error.status + " Server " + error.statusText;
 				}
 				this.alertService.error(error);

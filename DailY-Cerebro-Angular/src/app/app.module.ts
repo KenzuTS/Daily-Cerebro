@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +15,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserService } from './services/user.service';
+import { CommonModule } from '@angular/common';
 
 const appRoutes: Routes = [
 
@@ -33,12 +34,14 @@ const appRoutes: Routes = [
 		LoginComponent,
 		AlertComponent,
 		CrudUserComponent,
-		HomeComponent
+		HomeComponent,
+		EditUserComponent
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
+		FormsModule,
 		ReactiveFormsModule,
+		AppRoutingModule,
 		HttpClientModule,
 		RouterModule.forRoot(appRoutes)
 	],

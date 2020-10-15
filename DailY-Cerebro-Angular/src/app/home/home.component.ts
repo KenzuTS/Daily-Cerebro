@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { User } from '../models/user';
 
@@ -50,5 +50,35 @@ export class HomeComponent implements OnInit {
 				console.log(error);
 			}
 		);
+	}
+
+	testCallService(){
+		const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
+		let headersOption = new HttpHeaders();
+		headersOption = headersOption.append('Access-Control-Allow-Origin', '*');
+		headersOption = headersOption.append('Access-Control-Allow-Methods', ['GET', 'PUT', 'POST', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH']);
+		headersOption = headersOption.append('Access-Control-Allow-Headers', '*');
+		headersOption = headersOption.append('Access-Control-Expose-Headers', '*');
+
+		console.log(headersOption);
+		console.log(headersOption.getAll('Access-Control-Allow-Origin'));
+		console.log(headersOption.getAll('Access-Control-Allow-Methods'));
+		console.log(headersOption.getAll('Access-Control-Allow-Headers'));
+		console.log(headersOption.getAll('Access-Control-Expose-Headers'));
+
+		// http://localhost:8080/MAVEN_HIBJPA_V1/test
+		this.http.get<any>("http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/getAll", {
+			headers: headersOption
+		}).subscribe(
+			(response) => {
+				console.log(response);
+				console.log(this.http);
+			},
+			(error) => {
+				console.log(error);
+				console.log(this.http);
+			}
+		)
 	}
 }

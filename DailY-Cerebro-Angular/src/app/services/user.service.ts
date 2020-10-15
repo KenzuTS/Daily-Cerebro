@@ -7,7 +7,7 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	getAll() {
-		return this.http.get<User[]>(`https://testuser-9c352.firebaseio.com/users`);
+		return this.http.get<User[]>(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/getAll`);
 	}
 
 	getById(id: number) {
@@ -19,7 +19,7 @@ export class UserService {
 	}
 
 	update(user: User) {
-		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.id}`, user);
+		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.$id}`, user);
 	}
 
 	delete(id: number) {

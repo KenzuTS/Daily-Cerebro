@@ -1,9 +1,13 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav mr-auto">
+		<a class="nav-item nav-link" routerLink="/">Home</a>
+		<a class="nav-item nav-link" *ngIf="currentUser && currentUser.$role.$name === 'admin'" routerLink="/cruduser">CRUD</a>
+	</div>
+	<div class="navbar-nav">
+		<a class="nav-item nav-link" *ngIf="currentUser" (click)="logout()">log out</a>
+		<a class="nav-item nav-link" *ngIf="!currentUser" routerLink="/login">log in</a>
+	</div>
 </nav>
 
 <!-- main app container -->

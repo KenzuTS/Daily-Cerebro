@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Role } from '../models/Role';
 import { User } from '../models/user';
 
 @Injectable()
@@ -44,5 +45,12 @@ export class AuthenticationService {
 		// remove user from local storage to log user out
 		localStorage.removeItem('currentUser');
 		this.currentUserSubject.next(null);
+	}
+
+	testLogin(username: string, password: string){
+		const user = new User(100, username, "jak47@gmail.com", password);
+		user.$role = new Role(50, "admin");
+		localStorage.setItem('currentUser', JSON.stringify(user));
+		this.currentUserSubject.next(user);
 	}
 }
