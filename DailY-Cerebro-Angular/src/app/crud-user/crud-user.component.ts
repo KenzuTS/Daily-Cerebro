@@ -43,13 +43,15 @@ export class CrudUserComponent implements OnInit, OnDestroy {
 	}
 
 	private loadAllUsers() {
-		this.userService.getAll().pipe(first()).subscribe(users => {
-			this.users = users;
+		this.userService.getAll().pipe(first()).subscribe(
+			(users: User[]) => {
+
+				this.users = users;
 		});
 	}
 
 	detailUser(id: number){
-		let url = "cruduser/" + id;
+		let url = "edituser/" + id;
 		this.router.navigate([url]);
 	}
 

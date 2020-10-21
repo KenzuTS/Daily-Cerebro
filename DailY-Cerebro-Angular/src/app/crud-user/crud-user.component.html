@@ -1,10 +1,10 @@
-<h1>Hi {{ currentUser.$username }}!</h1>
+<h1>Hi {{ currentUser.username }}!</h1>
 <p>You're logged in with Angular 10!!</p>
 <h3>All registered users:</h3>
 <ul>
 	<li *ngFor="let user of users">
-		{{ user.$id }} {{ user.$username }} ({{ user.$mail }}) -
-		<a (click)="deleteUser(user.$id)" class="text-danger">Delete</a>
-		<a (click)="detailUser(user.$id)">Edit</a>
+		{{ user.id }} {{ user.username }} {{ user.email }} -
+		<a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+		<a (click)="detailUser(user.id)" class="text-info"> Edit</a>
 	</li>
 </ul>

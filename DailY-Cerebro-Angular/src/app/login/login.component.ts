@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
 	loading = false;
 	submitted = false;
 	returnUrl: string;
-	loginSubscription: Subscription;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.loginForm = this.formBuilder.group({
-			username: ['', Validators.required],
+			email: ['', Validators.required],
 			password: ['', Validators.required]
 		});
 
@@ -56,27 +55,17 @@ export class LoginComponent implements OnInit {
 
 		this.loading = true;
 
-		// TODO remove this
-		this.authenticationService.testLogin(this.f.username.value, this.f.password.value);
-		return;
-
-		this.authenticationService.login(this.f.username.value, this.f.password.value)
-		.pipe(first())
-		.subscribe(
-
+		let response = this.authenticationService.login(this.f.email.value, this.f.password.value).pipe(first()).subscribe(
 			data => {
 				this.router.navigate([this.returnUrl]);
 			},
 
 			error => {
-				if (typeof error != "string") { //TODO remove
-					error = "Error " + error.status + " Server " + error.statusText;
-				}
-				this.alertService.error(error);
 				console.log(error);
+				this.alertService.error(error);
 				this.loading = false;
 			}
-		);
+		)
 	}
 
 }

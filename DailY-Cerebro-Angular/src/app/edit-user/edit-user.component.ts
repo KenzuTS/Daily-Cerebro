@@ -12,10 +12,6 @@ import { UserService } from '../services/user.service';
 })
 export class EditUserComponent implements OnInit {
 
-	// TODO bind to user only
-	username: string;
-	password: string;
-	mail: string;
 	user: User;
 
 	constructor(
@@ -34,8 +30,8 @@ export class EditUserComponent implements OnInit {
 
 	onSubmit(form: NgForm){
 
-		this.user.$username = form.value['username'];
-		this.user.$mail = form.value['mail'];
+		this.user.username = form.value['username'];
+		this.user.email = form.value['mail'];
 		this.userService.update(this.user);
 	}
 

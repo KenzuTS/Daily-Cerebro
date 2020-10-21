@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,13 +16,19 @@ import { HomeComponent } from './home/home.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserService } from './services/user.service';
 import { CommonModule } from '@angular/common';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import * as moment from 'moment';
+import { RegisterComponent } from './register/register.component';
+import { RoleGuard } from './guards/role.guard';
 
 const appRoutes: Routes = [
 
 	{ path: '', component: HomeComponent },
-	{ path: 'cruduser', component: CrudUserComponent, canActivate: [AuthGuard] },
-	{ path: 'cruduser/:id', component: EditUserComponent, canActivate: [AuthGuard] },
+	{ path: 'cruduser', component: CrudUserComponent, canActivate: [RoleGuard] },
+	{ path: 'edituser/:id', component: EditUserComponent, canActivate: [RoleGuard] },
 	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
 
 	// otherwise redirect to home
 	{ path: '**', redirectTo: '' } // TODO 404 this page doesn't exist
@@ -35,7 +41,8 @@ const appRoutes: Routes = [
 		AlertComponent,
 		CrudUserComponent,
 		HomeComponent,
-		EditUserComponent
+		EditUserComponent,
+		RegisterComponent
 	],
 	imports: [
 		BrowserModule,
@@ -49,7 +56,10 @@ const appRoutes: Routes = [
 		AuthenticationService,
 		AlertService,
 		AuthGuard,
-		UserService
+		RoleGuard,
+		UserService,
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
 	],
 	bootstrap: [AppComponent]
 })

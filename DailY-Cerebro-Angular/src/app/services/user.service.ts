@@ -11,7 +11,7 @@ export class UserService {
 	}
 
 	getById(id: number) {
-		return this.http.get<User>(`https://testuser-9c352.firebaseio.com/users/${id}`);
+		return this.http.get<User>(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/get/${id}`);
 	}
 
 	register(user: User) {
@@ -19,7 +19,7 @@ export class UserService {
 	}
 
 	update(user: User) {
-		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.$id}`, user);
+		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.id}`, user);
 	}
 
 	delete(id: number) {

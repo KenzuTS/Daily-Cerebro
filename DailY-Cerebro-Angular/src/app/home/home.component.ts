@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit, setTestabilityGetter } from '@angular/core';
+import * as jQuery from '../../../node_modules/jquery';
 import { User } from '../models/user';
 
 @Component({
@@ -16,69 +17,39 @@ export class HomeComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	initDB() {
-		let users = [
-			{
-				id: 1,
-				username: "seba",
-				password: "123456",
-				firstName: "sebastien",
-				lastName: "tonneau"
-			},
+	testCallService() {
 
-			{
-				id: 2,
-				username: "seba2",
-				password: "123456",
-				firstName: "sestien",
-				lastName: "nnau"
-			},
+		// this.http.get("http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/getAll").subscribe(
+		// 	data => {console.log(data);},
+		// 	error => {console.log(error);}
+		// )
+		// return;
 
-			{
-				id: 3,
-				username: "seba3",
-				password: "123456",
-				firstName: "sebast",
-				lastName: "tneau"
-			},
-		];
-		this.http.post(`https://testuser-9c352.firebaseio.com/users.json`, users).subscribe(
-			() => {
-				console.log("post done");
-			},
-			(error) => {
-				console.log(error);
-			}
-		);
-	}
-
-	testCallService(){
-		const proxyurl = "https://cors-anywhere.herokuapp.com/";
-
-		let headersOption = new HttpHeaders();
-		headersOption = headersOption.append('Access-Control-Allow-Origin', '*');
-		headersOption = headersOption.append('Access-Control-Allow-Methods', ['GET', 'PUT', 'POST', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH']);
-		headersOption = headersOption.append('Access-Control-Allow-Headers', '*');
-		headersOption = headersOption.append('Access-Control-Expose-Headers', '*');
-
-		console.log(headersOption);
-		console.log(headersOption.getAll('Access-Control-Allow-Origin'));
-		console.log(headersOption.getAll('Access-Control-Allow-Methods'));
-		console.log(headersOption.getAll('Access-Control-Allow-Headers'));
-		console.log(headersOption.getAll('Access-Control-Expose-Headers'));
-
-		// http://localhost:8080/MAVEN_HIBJPA_V1/test
-		this.http.get<any>("http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/getAll", {
-			headers: headersOption
-		}).subscribe(
-			(response) => {
-				console.log(response);
-				console.log(this.http);
-			},
-			(error) => {
-				console.log(error);
-				console.log(this.http);
-			}
+		this.http.get<User>(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/get/1`).subscribe(
+			data => {console.log(data);},
+			error => {console.log(error);}
 		)
+		return;
+
+		jQuery.ajax({
+
+			url: "http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/getAll",
+			crossDomain: true,
+			type: "GET",
+
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'JSON',
+			async: false, //VERY IMPORTANT
+
+			success: function (resultData) {
+				console.log(resultData);
+				//alert("success");
+
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert("failed");
+			},
+			timeout: 120000,
+		});
 	}
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  mar. 13 oct. 2020 à 13:38
+-- Généré le :  mer. 21 oct. 2020 à 15:12
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -89,13 +89,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8mb4_0900_bin NOT NULL,
-  `mail` varchar(255) COLLATE utf8mb4_0900_bin NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_0900_bin NOT NULL,
   `role_id` int(10) UNSIGNED DEFAULT NULL,
   `favorite_game_id` int(11) UNSIGNED DEFAULT NULL,
   `stat_id` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE_mail` (`mail`),
+  UNIQUE KEY `UNIQUE_mail` (`email`),
   KEY `FK_role` (`role_id`),
   KEY `FK_game` (`favorite_game_id`),
   KEY `FK_stat` (`stat_id`)

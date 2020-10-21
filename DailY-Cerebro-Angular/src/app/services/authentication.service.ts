@@ -4,6 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Role } from '../models/Role';
 import { User } from '../models/user';
+import * as jQuery from '../../../node_modules/jquery';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,7 +14,7 @@ export class AuthenticationService {
 	private currentUserSubject: BehaviorSubject<User>;
 	public currentUser: Observable<User>;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private router: Router) {
 		this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
 		this.currentUser = this.currentUserSubject.asObservable();
 	}
@@ -21,36 +24,30 @@ export class AuthenticationService {
 		return this.currentUserSubject.value;
 	}
 
-	login(username: string, password: string) {
+	login(email: string, password: string) {
 
-		//TODO set url to call login service from server
-		return this.http.post<User>(`https://testuser-9c352.firebaseio.com/users/authenticate`, { username, password })
-			.pipe(map(
+		return this.http.post<any>(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/auth`, { email, password })
+			.pipe(map(data => {
 
-				user => {
+				// login successful if there's a jwt token in the response
+				// TODO format token
+				if (data) {
+					//const expiresAt = moment().add(token.expiresIn, 'second');
 
-					// if login successful
-					if (user) {
-						// store user details in local storage to keep user logged in between page refreshes
-						localStorage.setItem('currentUser', JSON.stringify(user));
-						this.currentUserSubject.next(user);
-					}
-
-					return user;
+					// store user details and jwt token in local storage to keep user logged in between page refreshes
+					//localStorage.setItem('currentUser', JSON.stringify(user));
+					localStorage.setItem('id_token', data.token);
+        			localStorage.setItem("user", JSON.stringify(data.user.valueOf()) );
+					this.currentUserSubject.next(data.user);
 				}
-			));
+
+				return data;
+			}));
 	}
 
 	logout() {
 		// remove user from local storage to log user out
 		localStorage.removeItem('currentUser');
 		this.currentUserSubject.next(null);
-	}
-
-	testLogin(username: string, password: string){
-		const user = new User(100, username, "jak47@gmail.com", password);
-		user.$role = new Role(50, "admin");
-		localStorage.setItem('currentUser', JSON.stringify(user));
-		this.currentUserSubject.next(user);
 	}
 }
