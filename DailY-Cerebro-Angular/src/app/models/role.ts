@@ -1,10 +1,10 @@
 export class Role{
 
-	public id: number;
 	public name: string;
+	public level: number;
 
-	constructor($id: number, $name: string) {
-		this.id = $id;
+	constructor($name: string, $level: number) {
 		this.name = $name;
+		this.level = $level;
 	}
 }

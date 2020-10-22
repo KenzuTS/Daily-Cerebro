@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MustMatch } from '../helpers/must-match.validator';
 import { User } from '../models/user';
 import { AlertService } from '../services/alert.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -35,9 +36,11 @@ export class RegisterComponent implements OnInit {
 	ngOnInit(): void {
 		this.registerForm = this.formBuilder.group({
 			username: ['', Validators.required],
-			email: ['', Validators.required, Validators.email],
-			password: ['', Validators.required, Validators.minLength(6)],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, Validators.minLength(6)]],
 			confirmPassword: ['', Validators.required]
+		},{
+			validator: MustMatch('password', 'confirmPassword')
 		});
 	}
 
@@ -61,7 +64,7 @@ export class RegisterComponent implements OnInit {
 			.subscribe(
 
 				data => {
-					this.router.navigate(['/']);
+					this.router.navigate(['/login']);
 				},
 				error => {
 					this.alertService.error(error);

@@ -24,11 +24,11 @@
         </div>
 	</div>
 	<div class="form-group">
-        <label for="confirmPassword">Confirm confirmPassword</label>
-        <input type="confirmPassword" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <label for="confirmPassword">Confirm password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
         <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
             <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-            <div *ngIf="f.confirmPassword === f.password">Make sure your passwords match</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Make sure your passwords match</div>
         </div>
     </div>
     <div class="form-group">

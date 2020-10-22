@@ -30,14 +30,9 @@ export class AuthenticationService {
 			.pipe(map(data => {
 
 				// login successful if there's a jwt token in the response
-				// TODO format token
-				if (data) {
-					//const expiresAt = moment().add(token.expiresIn, 'second');
-
-					// store user details and jwt token in local storage to keep user logged in between page refreshes
-					//localStorage.setItem('currentUser', JSON.stringify(user));
+				if (data && data.token) {
 					localStorage.setItem('id_token', data.token);
-        			localStorage.setItem("user", JSON.stringify(data.user.valueOf()) );
+        			localStorage.setItem("currentUser", JSON.stringify( data.user.valueOf() ));
 					this.currentUserSubject.next(data.user);
 				}
 

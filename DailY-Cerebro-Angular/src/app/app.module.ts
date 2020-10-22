@@ -15,12 +15,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserService } from './services/user.service';
-import { CommonModule } from '@angular/common';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
-import * as moment from 'moment';
 import { RegisterComponent } from './register/register.component';
 import { RoleGuard } from './guards/role.guard';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { RegisterGuard } from './guards/register.guard';
 
 const appRoutes: Routes = [
 
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
 	{ path: 'cruduser', component: CrudUserComponent, canActivate: [RoleGuard] },
 	{ path: 'edituser/:id', component: EditUserComponent, canActivate: [RoleGuard] },
 	{ path: 'login', component: LoginComponent },
-	{ path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+	{ path: 'register', component: RegisterComponent, canActivate: [RegisterGuard] },
 
 	// otherwise redirect to home
 	{ path: '**', redirectTo: '' } // TODO 404 this page doesn't exist
@@ -57,9 +57,12 @@ const appRoutes: Routes = [
 		AlertService,
 		AuthGuard,
 		RoleGuard,
+		RegisterGuard,
 		UserService,
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+
+		//fakeBackendProvider
 	],
 	bootstrap: [AppComponent]
 })

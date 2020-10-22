@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from '../models/user';
+import { AlertService } from '../services/alert.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class EditUserComponent implements OnInit {
 
 	constructor(
 		private userService: UserService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router,
+		private alertService: AlertService
 	) { }
 
 	ngOnInit(): void {
@@ -32,7 +35,15 @@ export class EditUserComponent implements OnInit {
 
 		this.user.username = form.value['username'];
 		this.user.email = form.value['mail'];
-		this.userService.update(this.user);
+		this.userService.update(this.user).subscribe(
+			data => {
+				this.router.navigate(['/cruduser']);
+			},
+
+			error => {
+				this.alertService.error(error);
+			}
+		)
 	}
 
 }

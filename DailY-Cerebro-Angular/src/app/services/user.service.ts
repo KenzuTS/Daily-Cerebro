@@ -15,14 +15,14 @@ export class UserService {
 	}
 
 	register(user: User) {
-		return this.http.post(`https://testuser-9c352.firebaseio.com/users/register`, user);
+		return this.http.post(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/register`, user);
 	}
 
 	update(user: User) {
-		return this.http.put(`https://testuser-9c352.firebaseio.com/users/${user.id}`, user);
+		return this.http.put(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/update/${user.iD}`, user);
 	}
 
 	delete(id: number) {
-		return this.http.delete(`https://testuser-9c352.firebaseio.com/users/${id}`);
+		return this.http.delete(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/delete/${id}`);
 	}
 }
