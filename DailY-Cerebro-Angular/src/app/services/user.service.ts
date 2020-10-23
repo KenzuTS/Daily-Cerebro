@@ -19,7 +19,7 @@ export class UserService {
 	}
 
 	update(user: User) {
-		return this.http.put(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/update/${user.iD}`, user);
+		return this.http.put(`http://localhost:8080/MAVEN_HIBJPA_V1/rest/user/update`, user);
 	}
 
 	delete(id: number) {

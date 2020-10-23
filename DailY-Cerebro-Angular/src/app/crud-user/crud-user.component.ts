@@ -47,7 +47,6 @@ export class CrudUserComponent implements OnInit, OnDestroy {
 			(users: User[]) => {
 
 				this.users = users;
-				console.log(users);
 		});
 	}
 

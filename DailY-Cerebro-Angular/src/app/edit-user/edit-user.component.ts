@@ -33,6 +33,7 @@ export class EditUserComponent implements OnInit {
 
 	onSubmit(form: NgForm){
 
+		this.user.iD = this.route.snapshot.params['id'];
 		this.user.username = form.value['username'];
 		this.user.email = form.value['mail'];
 		this.userService.update(this.user).subscribe(
