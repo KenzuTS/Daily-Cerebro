@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config" status="WARN"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config 
+ https://raw.githubusercontent.com/apache/logging-log4j2/log4j-2.11.1/log4j-core/src/main/resources/Log4j-config.xsd">
+	
+	<!-- L'appender est un objet chargé de sprécifier OU les logs sont envoyés -->
+    <Appenders>
+    
+    	<!-- ==> CODE  SERT A ENVOYER LES LOGS SUR LE RESEAU A UNE APP SPECIFIE 
+    		# Un programme du nom de 'ChainSaw' (console graphique) permet
+    		par exemple de travailler avec un peu plus de facilités...
+    	-->
+    
+        <!-- <Socket name="socket" host="localhost" port="4445">
+            <SerializedLayout />
+        </Socket>  -->
+    
+    
+    	<!-- ==> CODE NECESSAIRE POUR ENVOYER LES LOGS DANS UN FICHIER 
+    		 # il est configurable pour faire du roling cad une fois que le
+    		 fichier se constitue d'une certaine quantité de logs, on peut
+    		 switcher de fichier etc. A approfondir donc...
+    	-->
+    
+        <!--  <File name="file" fileName="webstore.log">
+            <PatternLayout>
+                <Pattern>%p %t %c - %m%n</Pattern>
+            </PatternLayout>
+        </File> -->
+        
+        
+        
+        <!-- Spécifie le pattern à utiliser lors des affichages en console -->
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%t] %-5p | %-60c | %m (%F:%L)%n"/>
+        </Console>
+        
+    </Appenders>
+
+    <Loggers>
+        
+        <Logger name="org.hibernate.SQL" level="warn" />
+        <Logger name="org.hibernate.type" level="warn" />
+
+    	<!-- ESSENTIEL POUR SAVOIR QUEL APPENDER VA ETRE UTILISER 
+    		# A noter que la ref est le NOM spécifié dans l'appender
+    		'Console' précisé ci-dessus..
+    	-->	
+        <Root level="warn">
+            <!-- AppenderRef ref="file" / -->
+            <AppenderRef ref="stdout" />
+        </Root>
+        
+    </Loggers>
+
+</Configuration>

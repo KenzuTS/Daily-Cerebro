@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>13</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>247</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Web Services
+valign=center
+bg=blue
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>585</x>
+      <y>130</y>
+      <w>364</w>
+      <h>351</h>
+    </coordinates>
+    <panel_attributes>Tomcat Server
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>598</x>
+      <y>247</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Filter
+valign=center
+bg=blue
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>598</x>
+      <y>325</y>
+      <w>338</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>DAO
+valign=center
+bg=blue
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>598</x>
+      <y>403</y>
+      <w>338</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Entity
+valign=center
+bg=blue
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1105</x>
+      <y>234</y>
+      <w>221</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>DATABASE
+valign=center
+bg=green
+layer=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>312</y>
+      <w>195</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>39</x>
+      <y>208</y>
+      <w>364</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>Client Angular https
+--
+bg=orange
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>52</x>
+      <y>247</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Interceptor
+valign=center
+bg=blue
+layer=2
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>234</x>
+      <y>247</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Service
+valign=center
+bg=blue
+layer=2
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>52</x>
+      <y>325</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Guard
+valign=center
+bg=blue
+layer=2
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>234</x>
+      <y>325</y>
+      <w>156</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Component
+valign=center
+bg=blue
+layer=2
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>312</y>
+      <w>221</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>598</x>
+      <y>169</y>
+      <w>338</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Jersey Servlet
+valign=center
+bg=blue
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
